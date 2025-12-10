@@ -2,6 +2,7 @@ package com.example.impostor.ui.screens
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -70,9 +71,10 @@ fun RouletteScreen(
         label = "rotation"
     )
 
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF212121)) // Fondo gris oscuro
     ) {
         Column(
             modifier = Modifier
@@ -86,14 +88,14 @@ fun RouletteScreen(
                     text = "¿Quién comienza?",
                     fontSize = 32.sp,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary,
+                    color = Color.White, // Texto blanco
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
 
                 Text(
                     text = if (!hasSpun) "Toca la ruleta para girarla" else "Girando...",
                     fontSize = 18.sp,
-                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
+                    color = Color.White.copy(alpha = 0.7f), // Texto blanco con transparencia
                     modifier = Modifier.padding(bottom = 32.dp)
                 )
             } else {
@@ -101,7 +103,7 @@ fun RouletteScreen(
                     text = "¡Comienza!",
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary,
+                    color = Color.White, // Texto blanco
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
 
@@ -110,7 +112,7 @@ fun RouletteScreen(
                         .fillMaxWidth()
                         .padding(horizontal = 32.dp, vertical = 16.dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                        containerColor = Color.Black // Tarjeta negra
                     ),
                     elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
                 ) {
@@ -122,7 +124,7 @@ fun RouletteScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(24.dp),
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                        color = Color.White // Texto blanco
                     )
                 }
             }
@@ -242,7 +244,11 @@ fun RouletteScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 32.dp)
-                        .height(56.dp)
+                        .height(56.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Black,
+                        contentColor = Color.White
+                    )
                 ) {
                     Text(
                         text = "Continuar",

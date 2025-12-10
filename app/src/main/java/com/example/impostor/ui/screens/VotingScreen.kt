@@ -1,5 +1,6 @@
 package com.example.impostor.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -23,9 +24,10 @@ fun VotingScreen(
 ) {
     var selectedPlayerIndex by remember { mutableStateOf<Int?>(null) }
     
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF212121)) // Fondo gris oscuro
     ) {
         Column(
             modifier = Modifier
@@ -45,7 +47,7 @@ fun VotingScreen(
                     fontSize = 32.sp,
                     fontWeight = FontWeight.Black,
                     textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.primary
+                    color = Color.White // Texto blanco
                 )
             }
             
@@ -82,7 +84,10 @@ fun VotingScreen(
                 enabled = selectedPlayerIndex != null,
                 shape = MaterialTheme.shapes.large,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primary
+                    containerColor = Color.Black, // Botón negro
+                    contentColor = Color.White,
+                    disabledContainerColor = Color.Black.copy(alpha = 0.5f),
+                    disabledContentColor = Color.White.copy(alpha = 0.5f)
                 )
             ) {
                 Text(
@@ -109,9 +114,9 @@ fun PlayerVoteCard(
             .clickable(onClick = onClick),
         colors = CardDefaults.cardColors(
             containerColor = if (isSelected)
-                Color(0xFF4CAF50)
+                Color(0xFF4CAF50) // Verde si está seleccionado
             else
-                MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+                Color.Black // Negro si no está seleccionado
         ),
         shape = MaterialTheme.shapes.large,
         elevation = CardDefaults.cardElevation(
@@ -130,7 +135,7 @@ fun PlayerVoteCard(
                         text = "✓",
                         fontSize = 48.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color(0xFF1B5E20)
+                        color = Color.White // Check blanco sobre verde
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                 }
@@ -140,10 +145,7 @@ fun PlayerVoteCard(
                     fontSize = if (isSelected) 20.sp else 18.sp,
                     fontWeight = if (isSelected) FontWeight.Bold else FontWeight.SemiBold,
                     textAlign = TextAlign.Center,
-                    color = if (isSelected)
-                        MaterialTheme.colorScheme.onPrimaryContainer
-                    else
-                        MaterialTheme.colorScheme.onSurface,
+                    color = Color.White, // Texto siempre blanco
                     modifier = Modifier.padding(horizontal = 12.dp)
                 )
             }

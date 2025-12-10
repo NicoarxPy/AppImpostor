@@ -13,6 +13,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -53,29 +54,40 @@ fun CustomCategoriesScreen(
                 TextButton(onClick = { categoryToDelete = null }) {
                     Text("Cancelar")
                 }
-            }
+            },
+            containerColor = Color(0xFF212121),
+            titleContentColor = Color.White,
+            textContentColor = Color.White.copy(alpha = 0.8f)
         )
     }
     
     Scaffold(
+        containerColor = Color(0xFF212121), // Fondo gris oscuro
         topBar = {
             TopAppBar(
                 title = { 
                     Text(
                         "Listas personalizadas",
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
                     ) 
                 },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.Default.ArrowBack, "Volver")
+                        Icon(Icons.Default.ArrowBack, "Volver", tint = Color.White)
                     }
                 },
                 actions = {
                     IconButton(onClick = onCreateNewClick) {
-                        Icon(Icons.Default.Add, "Crear nueva")
+                        Icon(Icons.Default.Add, "Crear nueva", tint = Color.White)
                     }
-                }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color(0xFF212121),
+                    titleContentColor = Color.White,
+                    navigationIconContentColor = Color.White,
+                    actionIconContentColor = Color.White
+                )
             )
         }
     ) { paddingValues ->
@@ -100,14 +112,14 @@ fun CustomCategoriesScreen(
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Medium,
                         textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
+                        color = Color.White.copy(alpha = 0.6f) // Texto blanco con transparencia
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = "Toca el botón + para crear una",
                         fontSize = 14.sp,
                         textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
+                        color = Color.White.copy(alpha = 0.5f) // Texto blanco con transparencia
                     )
                 }
             }
@@ -127,9 +139,10 @@ fun CustomCategoriesScreen(
                             .fillMaxWidth()
                             .aspectRatio(1f),
                         colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.primaryContainer
+                            containerColor = Color.Black // Tarjeta negra
                         ),
-                        shape = MaterialTheme.shapes.large,
+                        shape = MaterialTheme.shapes.extraLarge,
+                        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
                         onClick = { onCategoryClick(category) }
                     ) {
                         Box(
@@ -147,14 +160,14 @@ fun CustomCategoriesScreen(
                                     fontSize = 22.sp,
                                     fontWeight = FontWeight.Bold,
                                     textAlign = TextAlign.Center,
-                                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                                    color = Color.White // Texto blanco
                                 )
                                 Spacer(modifier = Modifier.height(8.dp))
                                 Text(
                                     text = "${category.words.size} palabras",
                                     fontSize = 12.sp,
                                     fontWeight = FontWeight.Light,
-                                    color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
+                                    color = Color.White.copy(alpha = 0.7f) // Texto blanco con transparencia
                                 )
                             }
                             
@@ -168,7 +181,7 @@ fun CustomCategoriesScreen(
                                 Icon(
                                     Icons.Default.Edit,
                                     contentDescription = "Editar",
-                                    tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f),
+                                    tint = Color.White.copy(alpha = 0.7f),
                                     modifier = Modifier.size(20.dp)
                                 )
                             }
@@ -183,7 +196,7 @@ fun CustomCategoriesScreen(
                                 Icon(
                                     Icons.Default.Delete,
                                     contentDescription = "Eliminar",
-                                    tint = MaterialTheme.colorScheme.error.copy(alpha = 0.7f),
+                                    tint = Color.Red.copy(alpha = 0.7f),
                                     modifier = Modifier.size(20.dp)
                                 )
                             }

@@ -1,6 +1,7 @@
 package com.example.impostor.ui.screens
 
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -10,6 +11,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -26,9 +28,10 @@ fun CardsScreen(
     var flippedCardIndex by remember { mutableStateOf<Int?>(null) }
     val allCardsViewed = gameState.players.all { it.hasSeenCard }
 
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF212121)) // Fondo gris oscuro
     ) {
         Column(
             modifier = Modifier
@@ -44,7 +47,7 @@ fun CardsScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 24.dp),
-                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
+                color = Color.White.copy(alpha = 0.7f) // Texto blanco con transparencia
             )
 
             LazyVerticalGrid(
@@ -79,7 +82,13 @@ fun CardsScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),
-                enabled = allCardsViewed
+                enabled = allCardsViewed,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Black,
+                    contentColor = Color.White,
+                    disabledContainerColor = Color.Black.copy(alpha = 0.5f),
+                    disabledContentColor = Color.White.copy(alpha = 0.5f)
+                )
             ) {
                 Text(
                     text = if (allCardsViewed) "Comenzar" else "Revela todas las tarjetas",
@@ -122,11 +131,7 @@ fun PlayerCard(
         ),
         shape = MaterialTheme.shapes.large,
         colors = CardDefaults.cardColors(
-            containerColor = if (hasSeenCard) {
-                MaterialTheme.colorScheme.surfaceVariant
-            } else {
-                MaterialTheme.colorScheme.primaryContainer
-            }
+            containerColor = Color.Black // Tarjeta siempre negra
         )
     ) {
         Box(
@@ -146,9 +151,9 @@ fun PlayerCard(
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Center,
                         color = if (hasSeenCard) {
-                            MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
+                            Color.White.copy(alpha = 0.5f)
                         } else {
-                            MaterialTheme.colorScheme.onPrimaryContainer
+                            Color.White
                         }
                     )
                     if (hasSeenCard) {
@@ -156,7 +161,7 @@ fun PlayerCard(
                         Text(
                             text = "✓ Vista",
                             fontSize = 14.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
+                            color = Color.Green.copy(alpha = 0.7f)
                         )
                     }
                 }
@@ -176,9 +181,9 @@ fun PlayerCard(
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Center,
                         color = if (word == "IMPOSTOR") {
-                            MaterialTheme.colorScheme.error
+                            Color.Red
                         } else {
-                            MaterialTheme.colorScheme.primary
+                            Color.White
                         }
                     )
                     
@@ -186,7 +191,11 @@ fun PlayerCard(
                     
                     Button(
                         onClick = onReadyClick,
-                        modifier = Modifier.fillMaxWidth(0.8f)
+                        modifier = Modifier.fillMaxWidth(0.8f),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.White, // Botón blanco para contraste en tarjeta negra
+                            contentColor = Color.Black
+                        )
                     ) {
                         Text("Listo")
                     }

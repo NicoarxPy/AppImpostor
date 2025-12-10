@@ -1,5 +1,6 @@
 package com.example.impostor.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -11,6 +12,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
@@ -52,8 +54,9 @@ fun AddPlayersScreen(
     if (showDeleteDialog) {
         AlertDialog(
             onDismissRequest = { showDeleteDialog = false },
-            title = { Text("Borrar participantes guardados") },
-            text = { Text("¿Estás seguro de que quieres borrar todos los participantes guardados?") },
+            title = { Text("Borrar participantes guardados", color = Color.White) },
+            text = { Text("¿Estás seguro de que quieres borrar todos los participantes guardados?", color = Color.White.copy(alpha = 0.8f)) },
+            containerColor = Color(0xFF212121),
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -79,8 +82,9 @@ fun AddPlayersScreen(
     if (showInfoDialog) {
         AlertDialog(
             onDismissRequest = { showInfoDialog = false },
-            title = { Text("Inicio aleatorio") },
-            text = { Text("En cada ronda se elegirá de manera aleatoria quién debe comenzar la discusión mediante una ruleta interactiva.") },
+            title = { Text("Inicio aleatorio", color = Color.White) },
+            text = { Text("En cada ronda se elegirá de manera aleatoria quién debe comenzar la discusión mediante una ruleta interactiva.", color = Color.White.copy(alpha = 0.8f)) },
+            containerColor = Color(0xFF212121),
             confirmButton = {
                 TextButton(onClick = { showInfoDialog = false }) {
                     Text("Entendido")
@@ -92,8 +96,9 @@ fun AddPlayersScreen(
     if (showVotingInfoDialog) {
         AlertDialog(
             onDismissRequest = { showVotingInfoDialog = false },
-            title = { Text("Votaciones") },
-            text = { Text("Los jugadores votarán para identificar al impostor. Si se equivocan, el jugador votado es eliminado y continúa la ronda. Gana el impostor si solo quedan 2 jugadores vivos.") },
+            title = { Text("Votaciones", color = Color.White) },
+            text = { Text("Los jugadores votarán para identificar al impostor. Si se equivocan, el jugador votado es eliminado y continúa la ronda. Gana el impostor si solo quedan 2 jugadores vivos.", color = Color.White.copy(alpha = 0.8f)) },
+            containerColor = Color(0xFF212121),
             confirmButton = {
                 TextButton(onClick = { showVotingInfoDialog = false }) {
                     Text("Entendido")
@@ -102,9 +107,10 @@ fun AddPlayersScreen(
         )
     }
 
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF212121))
     ) {
         Column(
             modifier = Modifier.fillMaxSize()
@@ -124,14 +130,14 @@ fun AddPlayersScreen(
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Light,
                         letterSpacing = 1.sp,
-                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
+                        color = Color.White.copy(alpha = 0.6f)
                     )
                     Text(
                         text = "Jugadores",
                         fontSize = 36.sp,
                         fontWeight = FontWeight.Black,
                         letterSpacing = 0.5.sp,
-                        color = MaterialTheme.colorScheme.primary
+                        color = Color.White
                     )
                 }
                 
@@ -143,7 +149,7 @@ fun AddPlayersScreen(
                         Icon(
                             Icons.Default.Delete,
                             contentDescription = "Borrar guardados",
-                            tint = MaterialTheme.colorScheme.error.copy(alpha = 0.7f)
+                            tint = Color.Red.copy(alpha = 0.7f)
                         )
                     }
                 }
@@ -158,7 +164,7 @@ fun AddPlayersScreen(
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
+                        containerColor = Color.Black // Tarjeta negra
                     ),
                     shape = MaterialTheme.shapes.large,
                     elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
@@ -173,7 +179,8 @@ fun AddPlayersScreen(
                         IconButton(
                             onClick = { if (playerCount > 2) playerCount-- },
                             enabled = playerCount > 2,
-                            modifier = Modifier.size(48.dp)
+                            modifier = Modifier.size(48.dp),
+                            colors = IconButtonDefaults.iconButtonColors(contentColor = Color.White)
                         ) {
                             Text(
                                 text = "−",
@@ -189,20 +196,21 @@ fun AddPlayersScreen(
                                 text = "$playerCount",
                                 fontSize = 48.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.primary
+                                color = Color.White
                             )
                             Text(
                                 text = "jugadores",
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.Light,
-                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                                color = Color.White.copy(alpha = 0.5f)
                             )
                         }
 
                         IconButton(
                             onClick = { if (playerCount < 20) playerCount++ },
                             enabled = playerCount < 20,
-                            modifier = Modifier.size(48.dp)
+                            modifier = Modifier.size(48.dp),
+                            colors = IconButtonDefaults.iconButtonColors(contentColor = Color.White)
                         ) {
                             Text(
                                 text = "+",
@@ -223,7 +231,7 @@ fun AddPlayersScreen(
                         Card(
                             modifier = Modifier.fillMaxWidth(),
                             colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
+                                containerColor = Color.Black // Tarjeta negra
                             ),
                             shape = MaterialTheme.shapes.medium,
                             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
@@ -241,20 +249,26 @@ fun AddPlayersScreen(
                                 ) {
                                     Checkbox(
                                         checked = randomStart,
-                                        onCheckedChange = { randomStart = it }
+                                        onCheckedChange = { randomStart = it },
+                                        colors = CheckboxDefaults.colors(
+                                            checkedColor = Color.White,
+                                            uncheckedColor = Color.White.copy(alpha = 0.6f),
+                                            checkmarkColor = Color.Black
+                                        )
                                     )
                                     Text(
                                         text = "Inicio aleatorio",
                                         fontSize = 15.sp,
                                         fontWeight = FontWeight.Medium,
-                                        modifier = Modifier.padding(start = 12.dp)
+                                        modifier = Modifier.padding(start = 12.dp),
+                                        color = Color.White
                                     )
                                 }
                                 IconButton(onClick = { showInfoDialog = true }) {
                                     Icon(
                                         Icons.Default.Info,
                                         contentDescription = "Información",
-                                        tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
+                                        tint = Color.White.copy(alpha = 0.7f)
                                     )
                                 }
                             }
@@ -265,7 +279,7 @@ fun AddPlayersScreen(
                         Card(
                             modifier = Modifier.fillMaxWidth(),
                             colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f)
+                                containerColor = Color.Black // Tarjeta negra
                             ),
                             shape = MaterialTheme.shapes.medium,
                             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
@@ -283,20 +297,26 @@ fun AddPlayersScreen(
                                 ) {
                                     Checkbox(
                                         checked = votingEnabled,
-                                        onCheckedChange = { votingEnabled = it }
+                                        onCheckedChange = { votingEnabled = it },
+                                        colors = CheckboxDefaults.colors(
+                                            checkedColor = Color.White,
+                                            uncheckedColor = Color.White.copy(alpha = 0.6f),
+                                            checkmarkColor = Color.Black
+                                        )
                                     )
                                     Text(
                                         text = "Habilitar votaciones",
                                         fontSize = 15.sp,
                                         fontWeight = FontWeight.Medium,
-                                        modifier = Modifier.padding(start = 12.dp)
+                                        modifier = Modifier.padding(start = 12.dp),
+                                        color = Color.White
                                     )
                                 }
                                 IconButton(onClick = { showVotingInfoDialog = true }) {
                                     Icon(
                                         Icons.Default.Info,
                                         contentDescription = "Información",
-                                        tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
+                                        tint = Color.White.copy(alpha = 0.7f)
                                     )
                                 }
                             }
@@ -314,7 +334,8 @@ fun AddPlayersScreen(
                             label = { 
                                 Text(
                                     "Jugador ${index + 1}",
-                                    fontWeight = FontWeight.Light
+                                    fontWeight = FontWeight.Light,
+                                    color = Color.White.copy(alpha = 0.7f)
                                 ) 
                             },
                             modifier = Modifier.fillMaxWidth(),
@@ -322,7 +343,16 @@ fun AddPlayersScreen(
                             keyboardOptions = KeyboardOptions(
                                 capitalization = KeyboardCapitalization.Words
                             ),
-                            shape = MaterialTheme.shapes.medium
+                            shape = MaterialTheme.shapes.medium,
+                            colors = OutlinedTextFieldDefaults.colors(
+                                focusedTextColor = Color.White,
+                                unfocusedTextColor = Color.White,
+                                focusedContainerColor = Color.Black,
+                                unfocusedContainerColor = Color.Black,
+                                cursorColor = Color.White,
+                                focusedBorderColor = Color.White,
+                                unfocusedBorderColor = Color.White.copy(alpha = 0.5f)
+                            )
                         )
                     }
                 }
@@ -340,7 +370,13 @@ fun AddPlayersScreen(
                         .fillMaxWidth()
                         .height(64.dp),
                     enabled = playerNames.count { it.isNotBlank() } >= 2,
-                    shape = MaterialTheme.shapes.large
+                    shape = MaterialTheme.shapes.large,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Black,
+                        contentColor = Color.White,
+                        disabledContainerColor = Color.Black.copy(alpha = 0.5f),
+                        disabledContentColor = Color.White.copy(alpha = 0.5f)
+                    )
                 ) {
                     Text(
                         text = "Comenzar Juego",

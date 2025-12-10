@@ -1,5 +1,6 @@
 package com.example.impostor.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -9,6 +10,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -21,9 +23,10 @@ import com.example.impostor.data.CategoriesData
 fun CategorySelectionScreen(
     onCategorySelected: (Category) -> Unit
 ) {
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF212121)) // Fondo gris oscuro
     ) {
         Column(
             modifier = Modifier.fillMaxSize()
@@ -40,14 +43,14 @@ fun CategorySelectionScreen(
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Light,
                     letterSpacing = 1.sp,
-                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
+                    color = Color.White.copy(alpha = 0.7f) // Texto blanco con transparencia
                 )
                 Text(
                     text = "Categoría",
                     fontSize = 40.sp,
                     fontWeight = FontWeight.Black,
                     letterSpacing = 1.sp,
-                    color = MaterialTheme.colorScheme.primary
+                    color = Color.White // Texto blanco
                 )
             }
             
@@ -82,11 +85,11 @@ fun CategoryCard(
             .fillMaxWidth()
             .aspectRatio(1f)
             .clickable(onClick = onClick),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+            containerColor = Color.Black // Tarjeta negra
         ),
-        shape = MaterialTheme.shapes.large
+        shape = MaterialTheme.shapes.extraLarge
     ) {
         Column(
             modifier = Modifier
@@ -101,7 +104,7 @@ fun CategoryCard(
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
                 letterSpacing = 0.5.sp,
-                color = MaterialTheme.colorScheme.onSurface
+                color = Color.White // Texto blanco
             )
         }
     }

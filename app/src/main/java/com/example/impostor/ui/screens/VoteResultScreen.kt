@@ -1,14 +1,18 @@
 package com.example.impostor.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.impostor.R
 import com.example.impostor.data.GameState
 
 @Composable
@@ -30,9 +34,7 @@ fun VoteResultScreen(
         color = if (isNavigating) 
             MaterialTheme.colorScheme.background 
         else if (isCorrect)
-            androidx.compose.ui.graphics.Color(0xFF4CAF50)
-        else if (impostorWins)
-            MaterialTheme.colorScheme.errorContainer
+            Color(0xFF4CAF50)
         else
             MaterialTheme.colorScheme.errorContainer
     ) {
@@ -50,9 +52,18 @@ fun VoteResultScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     if (isCorrect) {
-                        Text(
-                            text = "🎭",
-                            fontSize = 120.sp
+                        Image(
+                            painter = painterResource(id = R.drawable.impostor_logo_white),
+                            contentDescription = "Impostor Logo",
+                            modifier = Modifier.size(180.dp)
+                        )
+                        
+                        Spacer(modifier = Modifier.height(40.dp))
+                    } else if (impostorWins) {
+                        Image(
+                            painter = painterResource(id = R.drawable.impostor_logo_black),
+                            contentDescription = "Impostor Logo",
+                            modifier = Modifier.size(180.dp)
                         )
                         
                         Spacer(modifier = Modifier.height(40.dp))
@@ -69,7 +80,7 @@ fun VoteResultScreen(
                         letterSpacing = 2.sp,
                         textAlign = TextAlign.Center,
                         lineHeight = 48.sp,
-                        color = androidx.compose.ui.graphics.Color.White
+                        color = Color.White
                     )
                     
                     Spacer(modifier = Modifier.height(32.dp))
@@ -78,7 +89,7 @@ fun VoteResultScreen(
                         Card(
                             modifier = Modifier.fillMaxWidth(),
                             colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.error.copy(alpha = 0.2f)
+                                containerColor = Color.Black.copy(alpha = 0.6f)
                             ),
                             shape = MaterialTheme.shapes.large,
                             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
@@ -94,7 +105,7 @@ fun VoteResultScreen(
                                     fontSize = 20.sp,
                                     fontWeight = FontWeight.SemiBold,
                                     textAlign = TextAlign.Center,
-                                    color = MaterialTheme.colorScheme.onSurface
+                                    color = Color.White
                                 )
                                 
                                 Spacer(modifier = Modifier.height(12.dp))
@@ -104,7 +115,7 @@ fun VoteResultScreen(
                                     fontSize = 16.sp,
                                     fontWeight = FontWeight.Light,
                                     textAlign = TextAlign.Center,
-                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                                    color = Color.White.copy(alpha = 0.7f)
                                 )
                             }
                         }
@@ -117,7 +128,7 @@ fun VoteResultScreen(
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Medium,
                             textAlign = TextAlign.Center,
-                            color = androidx.compose.ui.graphics.Color.White.copy(alpha = 0.9f)
+                            color = Color.White.copy(alpha = 0.9f)
                         )
                         
                         Spacer(modifier = Modifier.height(16.dp))
@@ -127,7 +138,7 @@ fun VoteResultScreen(
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold,
                             textAlign = TextAlign.Center,
-                            color = androidx.compose.ui.graphics.Color.White
+                            color = Color.White
                         )
                     }
                 }
@@ -144,7 +155,8 @@ fun VoteResultScreen(
                         .height(64.dp),
                     shape = MaterialTheme.shapes.large,
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.primary
+                        containerColor = Color.Black, // Botón negro
+                        contentColor = Color.White // Texto blanco
                     )
                 ) {
                     Text(

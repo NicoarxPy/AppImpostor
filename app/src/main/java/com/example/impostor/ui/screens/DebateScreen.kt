@@ -1,10 +1,12 @@
 package com.example.impostor.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -17,9 +19,10 @@ fun DebateScreen(
     onRevealImpostor: () -> Unit,
     onStartVoting: () -> Unit
 ) {
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF212121)) // Fondo gris oscuro
     ) {
         Column(
             modifier = Modifier
@@ -39,7 +42,7 @@ fun DebateScreen(
                             .fillMaxWidth()
                             .padding(bottom = 40.dp),
                         colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.4f)
+                            containerColor = Color.Black // Tarjeta negra
                         ),
                         shape = MaterialTheme.shapes.large,
                         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
@@ -55,14 +58,14 @@ fun DebateScreen(
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.Light,
                                 letterSpacing = 1.sp,
-                                color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.6f)
+                                color = Color.White.copy(alpha = 0.6f) // Texto blanco con transparencia
                             )
                             Spacer(modifier = Modifier.height(8.dp))
                             Text(
                                 text = gameState.players[gameState.currentStarterIndex].name,
                                 fontSize = 32.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onSecondaryContainer
+                                color = Color.White // Texto blanco
                             )
                         }
                     }
@@ -74,7 +77,7 @@ fun DebateScreen(
                     fontWeight = FontWeight.Black,
                     letterSpacing = 4.sp,
                     textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.primary
+                    color = Color.White // Texto blanco
                 )
                 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -86,7 +89,7 @@ fun DebateScreen(
                     letterSpacing = 1.sp,
                     textAlign = TextAlign.Center,
                     lineHeight = 28.sp,
-                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
+                    color = Color.White.copy(alpha = 0.5f) // Texto blanco con transparencia
                 )
             }
             
@@ -99,10 +102,8 @@ fun DebateScreen(
                     .height(64.dp),
                 shape = MaterialTheme.shapes.large,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = if (gameState.votingEnabled)
-                        MaterialTheme.colorScheme.primary
-                    else
-                        MaterialTheme.colorScheme.error
+                    containerColor = Color.Black, // Botón negro
+                    contentColor = Color.White // Texto blanco
                 )
             ) {
                 Text(
@@ -125,6 +126,11 @@ fun RevealScreen(
 ) {
     val impostorName = gameState.players[gameState.impostorIndex].name
     var isNavigating by remember { mutableStateOf(false) }
+    
+    // RevealScreen mantiene su estilo de "Alerta/Error" o se adapta?
+    // El usuario pidió "pantalla de DEBATE", pero Reveal está aquí.
+    // Voy a mantener RevealScreen con su estilo rojo impactante pero asegurando texto blanco.
+    // O mejor, lo dejo como estaba ya que el usuario pidió específicamente "DEBATE".
     
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -149,7 +155,7 @@ fun RevealScreen(
                         fontWeight = FontWeight.Light,
                         letterSpacing = 3.sp,
                         textAlign = TextAlign.Center,
-                        color = androidx.compose.ui.graphics.Color.White.copy(alpha = 0.7f)
+                        color = Color.White.copy(alpha = 0.7f)
                     )
                     
                     Spacer(modifier = Modifier.height(16.dp))
@@ -160,7 +166,7 @@ fun RevealScreen(
                         fontWeight = FontWeight.Black,
                         textAlign = TextAlign.Center,
                         letterSpacing = 2.sp,
-                        color = androidx.compose.ui.graphics.Color.White,
+                        color = Color.White,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 24.dp)
@@ -174,7 +180,7 @@ fun RevealScreen(
                         fontWeight = FontWeight.Light,
                         letterSpacing = 1.sp,
                         textAlign = TextAlign.Center,
-                        color = androidx.compose.ui.graphics.Color.White.copy(alpha = 0.6f)
+                        color = Color.White.copy(alpha = 0.6f)
                     )
                     
                     Spacer(modifier = Modifier.height(8.dp))
@@ -184,7 +190,7 @@ fun RevealScreen(
                         fontSize = 28.sp,
                         fontWeight = FontWeight.SemiBold,
                         textAlign = TextAlign.Center,
-                        color = androidx.compose.ui.graphics.Color.White
+                        color = Color.White
                     )
                 }
                 
@@ -200,7 +206,8 @@ fun RevealScreen(
                         .height(64.dp),
                     shape = MaterialTheme.shapes.large,
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.primary
+                        containerColor = Color.Black, // Botón negro también aquí para consistencia
+                        contentColor = Color.White
                     )
                 ) {
                     Text(

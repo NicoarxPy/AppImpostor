@@ -1,21 +1,27 @@
 package com.example.impostor.ui.screens
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.impostor.R
 
 @Composable
 fun WelcomeScreen(
     onPlayClick: () -> Unit
 ) {
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF212121)) // Fondo gris oscuro
     ) {
         Column(
             modifier = Modifier
@@ -29,9 +35,10 @@ fun WelcomeScreen(
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    text = "🎭",
-                    fontSize = 120.sp
+                Image(
+                    painter = painterResource(id = R.drawable.impostor_logo),
+                    contentDescription = "Impostor Logo",
+                    modifier = Modifier.size(180.dp)
                 )
                 
                 Spacer(modifier = Modifier.height(32.dp))
@@ -41,7 +48,7 @@ fun WelcomeScreen(
                     fontSize = 56.sp,
                     fontWeight = FontWeight.Black,
                     letterSpacing = 4.sp,
-                    color = MaterialTheme.colorScheme.primary
+                    color = Color.White // Texto blanco
                 )
                 
                 Spacer(modifier = Modifier.height(12.dp))
@@ -51,7 +58,7 @@ fun WelcomeScreen(
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Light,
                     letterSpacing = 1.sp,
-                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
+                    color = Color.White.copy(alpha = 0.8f) // Texto blanco con transparencia
                 )
             }
             
@@ -62,15 +69,20 @@ fun WelcomeScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(64.dp),
-                shape = MaterialTheme.shapes.large,
+                shape = MaterialTheme.shapes.extraLarge,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primary
+                    containerColor = Color.Black, // Botón negro
+                    contentColor = Color.White // Texto blanco
+                ),
+                elevation = ButtonDefaults.buttonElevation(
+                    defaultElevation = 8.dp,
+                    pressedElevation = 2.dp
                 )
             ) {
                 Text(
                     text = "Jugar",
                     fontSize = 22.sp,
-                    fontWeight = FontWeight.SemiBold,
+                    fontWeight = FontWeight.Bold,
                     letterSpacing = 2.sp
                 )
             }

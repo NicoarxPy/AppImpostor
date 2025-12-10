@@ -1,23 +1,28 @@
 package com.example.impostor.ui.screens
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.impostor.R
 
 @Composable
 fun ListTypeSelectionScreen(
     onCustomListsClick: () -> Unit,
     onPredefinedListsClick: () -> Unit
 ) {
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF212121)) // Fondo gris oscuro
     ) {
         Column(
             modifier = Modifier
@@ -26,17 +31,19 @@ fun ListTypeSelectionScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text(
-                text = "🎭",
-                fontSize = 80.sp,
-                modifier = Modifier.padding(bottom = 24.dp)
+            Image(
+                painter = painterResource(id = R.drawable.impostor_logo),
+                contentDescription = "Impostor Logo",
+                modifier = Modifier.size(180.dp)
             )
             
+            Spacer(modifier = Modifier.height(24.dp))
+
             Text(
                 text = "IMPOSTOR",
                 fontSize = 48.sp,
                 fontWeight = FontWeight.Black,
-                color = MaterialTheme.colorScheme.primary,
+                color = Color.White, // Texto blanco
                 letterSpacing = 2.sp
             )
             
@@ -48,9 +55,10 @@ fun ListTypeSelectionScreen(
                     .fillMaxWidth()
                     .height(120.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.secondaryContainer
+                    containerColor = Color.Black // Tarjeta negra
                 ),
-                shape = MaterialTheme.shapes.large,
+                shape = MaterialTheme.shapes.extraLarge,
+                elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
                 onClick = onPredefinedListsClick
             ) {
                 Box(
@@ -64,20 +72,20 @@ fun ListTypeSelectionScreen(
                             text = "Listas predeterminadas",
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onSecondaryContainer
+                            color = Color.White // Texto blanco
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = "Categorías del juego",
                             fontSize = 14.sp,
-                            fontWeight = FontWeight.Light,
-                            color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f)
+                            fontWeight = FontWeight.Medium,
+                            color = Color.White.copy(alpha = 0.7f) // Texto blanco con transparencia
                         )
                     }
                 }
             }
             
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(20.dp))
             
             // Botón de Listas Personalizadas
             Card(
@@ -85,9 +93,10 @@ fun ListTypeSelectionScreen(
                     .fillMaxWidth()
                     .height(120.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                    containerColor = Color.Black // Tarjeta negra
                 ),
-                shape = MaterialTheme.shapes.large,
+                shape = MaterialTheme.shapes.extraLarge,
+                elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
                 onClick = onCustomListsClick
             ) {
                 Box(
@@ -101,14 +110,14 @@ fun ListTypeSelectionScreen(
                             text = "Listas personalizadas",
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                            color = Color.White // Texto blanco
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = "Crea tus propias categorías",
                             fontSize = 14.sp,
-                            fontWeight = FontWeight.Light,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
+                            fontWeight = FontWeight.Medium,
+                            color = Color.White.copy(alpha = 0.7f) // Texto blanco con transparencia
                         )
                     }
                 }

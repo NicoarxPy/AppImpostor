@@ -13,6 +13,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
@@ -36,17 +37,19 @@ fun CreateCategoryScreen(
     var showWordsError by remember { mutableStateOf(false) }
     
     Scaffold(
+        containerColor = Color(0xFF212121), // Fondo gris oscuro
         topBar = {
             TopAppBar(
                 title = { 
                     Text(
                         if (existingCategory != null) "Editar categoría" else "Nueva categoría",
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
                     ) 
                 },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.Default.ArrowBack, "Volver")
+                        Icon(Icons.Default.ArrowBack, "Volver", tint = Color.White)
                     }
                 },
                 actions = {
@@ -62,11 +65,23 @@ fun CreateCategoryScreen(
                             }
                         },
                         modifier = Modifier.padding(end = 8.dp).width(100.dp),
-                        enabled = categoryName.trim().isNotEmpty() && addedWords.isNotEmpty()
+                        enabled = categoryName.trim().isNotEmpty() && addedWords.isNotEmpty(),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.Black,
+                            contentColor = Color.White,
+                            disabledContainerColor = Color.Black.copy(alpha = 0.5f),
+                            disabledContentColor = Color.White.copy(alpha = 0.5f)
+                        )
                     ) {
                         Text(if (existingCategory != null) "Guardar" else "Crear")
                     }
-                }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color(0xFF212121),
+                    titleContentColor = Color.White,
+                    navigationIconContentColor = Color.White,
+                    actionIconContentColor = Color.White
+                )
             )
         }
     ) { paddingValues ->
@@ -81,7 +96,8 @@ fun CreateCategoryScreen(
                     text = "Nombre de la categoría",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier.padding(bottom = 8.dp)
+                    modifier = Modifier.padding(bottom = 8.dp),
+                    color = Color.White
                 )
                 
                 OutlinedTextField(
@@ -91,14 +107,23 @@ fun CreateCategoryScreen(
                         showNameError = false
                     },
                     modifier = Modifier.fillMaxWidth(),
-                    placeholder = { Text("Ej: Países, Marcas, etc.") },
+                    placeholder = { Text("Ej: Países, Marcas, etc.", color = Color.White.copy(alpha = 0.5f)) },
                     isError = showNameError,
                     supportingText = if (showNameError) {
-                        { Text("El nombre no puede estar vacío") }
+                        { Text("El nombre no puede estar vacío", color = MaterialTheme.colorScheme.error) }
                     } else null,
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Words
+                    ),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = Color.White,
+                        unfocusedTextColor = Color.White,
+                        focusedContainerColor = Color.Black,
+                        unfocusedContainerColor = Color.Black,
+                        cursorColor = Color.White,
+                        focusedBorderColor = Color.White,
+                        unfocusedBorderColor = Color.White.copy(alpha = 0.5f)
                     )
                 )
                 
@@ -108,13 +133,14 @@ fun CreateCategoryScreen(
                     text = "Agregar palabras",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier.padding(bottom = 8.dp)
+                    modifier = Modifier.padding(bottom = 8.dp),
+                    color = Color.White
                 )
                 
                 Text(
                     text = "Escribe una palabra por línea. Puedes pegar un texto con múltiples palabras.",
                     fontSize = 12.sp,
-                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
+                    color = Color.White.copy(alpha = 0.6f),
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 
@@ -127,13 +153,22 @@ fun CreateCategoryScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(200.dp),
-                    placeholder = { Text("Palabra 1\nPalabra 2\nPalabra 3...") },
+                    placeholder = { Text("Palabra 1\nPalabra 2\nPalabra 3...", color = Color.White.copy(alpha = 0.5f)) },
                     isError = showWordsError,
                     supportingText = if (showWordsError) {
-                        { Text("Debes agregar al menos una palabra") }
+                        { Text("Debes agregar al menos una palabra", color = MaterialTheme.colorScheme.error) }
                     } else null,
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences
+                    ),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = Color.White,
+                        unfocusedTextColor = Color.White,
+                        focusedContainerColor = Color.Black,
+                        unfocusedContainerColor = Color.Black,
+                        cursorColor = Color.White,
+                        focusedBorderColor = Color.White,
+                        unfocusedBorderColor = Color.White.copy(alpha = 0.5f)
                     )
                 )
                 
@@ -153,7 +188,11 @@ fun CreateCategoryScreen(
                             showWordsError = true
                         }
                     },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Black,
+                        contentColor = Color.White
+                    )
                 ) {
                     Text("Agregar palabras")
                 }
@@ -165,7 +204,8 @@ fun CreateCategoryScreen(
                         text = "Palabras agregadas (${addedWords.size})",
                         fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
-                        modifier = Modifier.padding(bottom = 12.dp)
+                        modifier = Modifier.padding(bottom = 12.dp),
+                        color = Color.White
                     )
                 }
             }
@@ -177,7 +217,7 @@ fun CreateCategoryScreen(
                             .fillMaxWidth()
                             .padding(vertical = 4.dp),
                         colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surfaceVariant
+                            containerColor = Color.Black // Tarjeta negra
                         )
                     ) {
                         Row(
@@ -191,7 +231,16 @@ fun CreateCategoryScreen(
                                 value = editingWordText,
                                 onValueChange = { editingWordText = it },
                                 modifier = Modifier.weight(1f),
-                                singleLine = true
+                                singleLine = true,
+                                colors = OutlinedTextFieldDefaults.colors(
+                                    focusedTextColor = Color.White,
+                                    unfocusedTextColor = Color.White,
+                                    focusedContainerColor = Color(0xFF212121), // Un poco más claro dentro de tarjeta negra
+                                    unfocusedContainerColor = Color(0xFF212121),
+                                    cursorColor = Color.White,
+                                    focusedBorderColor = Color.White,
+                                    unfocusedBorderColor = Color.White.copy(alpha = 0.5f)
+                                )
                             )
                             IconButton(
                                 onClick = {
@@ -204,7 +253,7 @@ fun CreateCategoryScreen(
                                     editingWordText = ""
                                 }
                             ) {
-                                Icon(Icons.Default.Close, "Guardar", tint = MaterialTheme.colorScheme.primary)
+                                Icon(Icons.Default.Close, "Guardar", tint = Color.White)
                             }
                         }
                     }
@@ -214,7 +263,7 @@ fun CreateCategoryScreen(
                             .fillMaxWidth()
                             .padding(vertical = 4.dp),
                         colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+                            containerColor = Color.Black // Tarjeta negra
                         )
                     ) {
                         Row(
@@ -227,7 +276,8 @@ fun CreateCategoryScreen(
                             Text(
                                 text = word,
                                 fontSize = 16.sp,
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier.weight(1f),
+                                color = Color.White
                             )
                             Row {
                                 IconButton(
@@ -240,7 +290,7 @@ fun CreateCategoryScreen(
                                     Icon(
                                         Icons.Default.Edit,
                                         "Editar",
-                                        tint = MaterialTheme.colorScheme.primary,
+                                        tint = Color.White.copy(alpha = 0.7f),
                                         modifier = Modifier.size(18.dp)
                                     )
                                 }
@@ -253,7 +303,7 @@ fun CreateCategoryScreen(
                                     Icon(
                                         Icons.Default.Delete,
                                         "Eliminar",
-                                        tint = MaterialTheme.colorScheme.error,
+                                        tint = MaterialTheme.colorScheme.error.copy(alpha = 0.7f),
                                         modifier = Modifier.size(18.dp)
                                     )
                                 }
