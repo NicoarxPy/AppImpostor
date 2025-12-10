@@ -57,17 +57,22 @@ class GameViewModel(
         }
     }
 
-    fun startGame(randomStart: Boolean = false) {
+    fun startGame(randomStart: Boolean = false, votingEnabled: Boolean = false) {
         val category = selectedCategory ?: return
         val selectedWord = category.words.random()
         val impostorIndex = players.indices.random()
         
+        // Resetear el estado de eliminación
+        val resetPlayers = players.map { it.copy(isEliminated = false, hasSeenCard = false) }
+        players = resetPlayers
+        
         gameState = GameState(
             category = category,
-            players = players,
+            players = resetPlayers,
             selectedWord = selectedWord,
             impostorIndex = impostorIndex,
-            randomStart = randomStart
+            randomStart = randomStart,
+            votingEnabled = votingEnabled
         )
     }
 
@@ -88,13 +93,14 @@ class GameViewModel(
     fun resetGame() {
         val category = selectedCategory ?: return
         val randomStart = gameState?.randomStart ?: false
+        val votingEnabled = gameState?.votingEnabled ?: false
         
         // Generar nueva palabra e impostor aleatorio
         val selectedWord = category.words.random()
         val impostorIndex = players.indices.random()
         
-        // Resetear el estado de vistos
-        val resetPlayers = players.map { it.copy(hasSeenCard = false) }
+        // Resetear el estado de vistos y eliminados
+        val resetPlayers = players.map { it.copy(hasSeenCard = false, isEliminated = false) }
         players = resetPlayers
         
         // Actualizar el estado con los nuevos valores
@@ -104,8 +110,17 @@ class GameViewModel(
             selectedWord = selectedWord,
             impostorIndex = impostorIndex,
             randomStart = randomStart,
-            currentStarterIndex = null
+            currentStarterIndex = null,
+            votingEnabled = votingEnabled
         )
+    }
+    
+    fun eliminatePlayer(playerIndex: Int) {
+        gameState?.let { state ->
+            val updatedPlayers = state.players.toMutableList()
+            updatedPlayers[playerIndex] = updatedPlayers[playerIndex].copy(isEliminated = true)
+            gameState = state.copy(players = updatedPlayers)
+        }
     }
 
     fun resetAll() {

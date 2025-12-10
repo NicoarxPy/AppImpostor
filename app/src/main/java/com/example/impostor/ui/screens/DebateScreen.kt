@@ -14,7 +14,8 @@ import com.example.impostor.data.GameState
 @Composable
 fun DebateScreen(
     gameState: GameState,
-    onRevealImpostor: () -> Unit
+    onRevealImpostor: () -> Unit,
+    onStartVoting: () -> Unit
 ) {
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -23,84 +24,96 @@ fun DebateScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(32.dp),
+                .padding(40.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.SpaceBetween
         ) {
-            if (gameState.currentStarterIndex != null) {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 24.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.tertiaryContainer
-                    ),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-                ) {
-                    Column(
+            Spacer(modifier = Modifier.weight(0.5f))
+            
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                if (gameState.currentStarterIndex != null) {
+                    Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(20.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
+                            .padding(bottom = 40.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.4f)
+                        ),
+                        shape = MaterialTheme.shapes.large,
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
                     ) {
-                        Text(
-                            text = "Comienza la discusión",
-                            fontSize = 16.sp,
-                            color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.7f)
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            text = gameState.players[gameState.currentStarterIndex].name,
-                            fontSize = 28.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onTertiaryContainer
-                        )
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(24.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = "Comienza",
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Light,
+                                letterSpacing = 1.sp,
+                                color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.6f)
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(
+                                text = gameState.players[gameState.currentStarterIndex].name,
+                                fontSize = 32.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onSecondaryContainer
+                            )
+                        }
                     }
                 }
+                
+                Text(
+                    text = "DEBATE",
+                    fontSize = 48.sp,
+                    fontWeight = FontWeight.Black,
+                    letterSpacing = 4.sp,
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.primary
+                )
+                
+                Spacer(modifier = Modifier.height(20.dp))
+                
+                Text(
+                    text = "Discutan y descubran\nal impostor",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Light,
+                    letterSpacing = 1.sp,
+                    textAlign = TextAlign.Center,
+                    lineHeight = 28.sp,
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
+                )
             }
             
-            Text(
-                text = "⏰",
-                fontSize = 80.sp
-            )
-            
-            Spacer(modifier = Modifier.height(32.dp))
-            
-            Text(
-                text = "Hora del debate",
-                fontSize = 36.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.primary
-            )
-            
-            Spacer(modifier = Modifier.height(16.dp))
-            
-            Text(
-                text = "Discutan entre ustedes para descubrir quién es el impostor",
-                fontSize = 18.sp,
-                textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
-                modifier = Modifier.padding(horizontal = 16.dp)
-            )
-            
-            Spacer(modifier = Modifier.height(64.dp))
+            Spacer(modifier = Modifier.weight(1f))
             
             Button(
-                onClick = onRevealImpostor,
+                onClick = if (gameState.votingEnabled) onStartVoting else onRevealImpostor,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(56.dp),
+                    .height(64.dp),
+                shape = MaterialTheme.shapes.large,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.error
+                    containerColor = if (gameState.votingEnabled)
+                        MaterialTheme.colorScheme.primary
+                    else
+                        MaterialTheme.colorScheme.error
                 )
             ) {
                 Text(
-                    text = "Revelar al impostor",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold
+                    text = if (gameState.votingEnabled) "Iniciar Votación" else "Revelar Impostor",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    letterSpacing = 1.sp
                 )
             }
+            
+            Spacer(modifier = Modifier.height(24.dp))
         }
     }
 }
@@ -121,55 +134,61 @@ fun RevealScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(32.dp),
+                    .padding(40.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(
-                    text = "🎭",
-                    fontSize = 100.sp
-                )
+                Spacer(modifier = Modifier.weight(1f))
                 
-                Spacer(modifier = Modifier.height(32.dp))
-                
-                Text(
-                    text = "El impostor era...",
-                    fontSize = 24.sp,
-                    textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.7f)
-                )
-                
-                Spacer(modifier = Modifier.height(16.dp))
-                
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.error
-                    )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = impostorName,
-                        fontSize = 42.sp,
-                        fontWeight = FontWeight.Bold,
+                        text = "EL IMPOSTOR ERA",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Light,
+                        letterSpacing = 3.sp,
                         textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.onError,
+                        color = androidx.compose.ui.graphics.Color.White.copy(alpha = 0.7f)
+                    )
+                    
+                    Spacer(modifier = Modifier.height(16.dp))
+                    
+                    Text(
+                        text = impostorName,
+                        fontSize = 48.sp,
+                        fontWeight = FontWeight.Black,
+                        textAlign = TextAlign.Center,
+                        letterSpacing = 2.sp,
+                        color = androidx.compose.ui.graphics.Color.White,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(32.dp)
+                            .padding(horizontal = 24.dp)
+                    )
+                    
+                    Spacer(modifier = Modifier.height(24.dp))
+                    
+                    Text(
+                        text = "La palabra era",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Light,
+                        letterSpacing = 1.sp,
+                        textAlign = TextAlign.Center,
+                        color = androidx.compose.ui.graphics.Color.White.copy(alpha = 0.6f)
+                    )
+                    
+                    Spacer(modifier = Modifier.height(8.dp))
+                    
+                    Text(
+                        text = gameState.selectedWord,
+                        fontSize = 28.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        textAlign = TextAlign.Center,
+                        color = androidx.compose.ui.graphics.Color.White
                     )
                 }
                 
-                Spacer(modifier = Modifier.height(24.dp))
-                
-                Text(
-                    text = "La palabra era: ${gameState.selectedWord}",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Medium,
-                    textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.onErrorContainer
-                )
-                
-                Spacer(modifier = Modifier.height(64.dp))
+                Spacer(modifier = Modifier.weight(1f))
                 
                 Button(
                     onClick = {
@@ -178,17 +197,21 @@ fun RevealScreen(
                     },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(56.dp),
+                        .height(64.dp),
+                    shape = MaterialTheme.shapes.large,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.primary
                     )
                 ) {
                     Text(
-                        text = "Siguiente ronda",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold
+                        text = "Siguiente Ronda",
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        letterSpacing = 1.sp
                     )
                 }
+                
+                Spacer(modifier = Modifier.height(24.dp))
             }
         }
     }

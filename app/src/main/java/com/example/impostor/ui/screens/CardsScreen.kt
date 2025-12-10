@@ -115,7 +115,12 @@ fun PlayerCard(
                 cameraDistance = 12f * density
             }
             .clickable(enabled = !hasSeenCard && !isFlipped) { onCardClick() },
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 8.dp,
+            pressedElevation = 12.dp,
+            hoveredElevation = 10.dp
+        ),
+        shape = MaterialTheme.shapes.large,
         colors = CardDefaults.cardColors(
             containerColor = if (hasSeenCard) {
                 MaterialTheme.colorScheme.surfaceVariant
@@ -137,7 +142,7 @@ fun PlayerCard(
                 ) {
                     Text(
                         text = playerName,
-                        fontSize = 20.sp,
+                        fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Center,
                         color = if (hasSeenCard) {

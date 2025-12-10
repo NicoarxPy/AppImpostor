@@ -35,15 +35,15 @@ fun RouletteScreen(
     val playerNames = gameState.players.map { it.name }
     val colors = remember {
         listOf(
-            Color(0xFFFF1744), // Rojo brillante
-            Color(0xFF2979FF), // Azul brillante
-            Color(0xFF00E676), // Verde brillante
-            Color(0xFFFFEA00), // Amarillo brillante
-            Color(0xFFD500F9), // Morado brillante
-            Color(0xFFFF6E40), // Naranja brillante
-            Color(0xFF00E5FF), // Cyan brillante
-            Color(0xFFFF4081), // Rosa brillante
-            Color(0xFF76FF03)  // Lima brillante
+            Color(0xFF90CAF9), // Azul claro
+            Color(0xFF64B5F6), // Azul medio claro
+            Color(0xFF42A5F5), // Azul medio
+            Color(0xFF2196F3), // Azul
+            Color(0xFF1E88E5), // Azul medio oscuro
+            Color(0xFF1976D2), // Azul oscuro
+            Color(0xFFBBDEFB), // Azul muy claro
+            Color(0xFF82B1FF), // Azul pastel
+            Color(0xFF448AFF)  // Azul brillante suave
         )
     }
 
@@ -170,6 +170,17 @@ fun RouletteScreen(
                                 size = Size(size.width, size.height)
                             )
                             
+                            // Dibujar borde oscuro entre secciones
+                            drawArc(
+                                color = Color(0xFF1A1A1A),
+                                startAngle = startAngle - 90,
+                                sweepAngle = anglePerSection,
+                                useCenter = true,
+                                topLeft = Offset.Zero,
+                                size = Size(size.width, size.height),
+                                style = androidx.compose.ui.graphics.drawscope.Stroke(width = 3f)
+                            )
+                            
                             // Dibujar texto
                             val textAngle = (startAngle + anglePerSection / 2 - 90) * (PI / 180).toFloat()
                             val textRadius = radius * 0.65f
@@ -183,10 +194,15 @@ fun RouletteScreen(
                                 
                                 val paint = android.graphics.Paint().apply {
                                     color = android.graphics.Color.WHITE
-                                    textSize = 50f
+                                    textSize = 52f
                                     textAlign = android.graphics.Paint.Align.CENTER
-                                    isFakeBoldText = true
-                                    setShadowLayer(6f, 0f, 0f, android.graphics.Color.BLACK)
+                                    typeface = android.graphics.Typeface.create(
+                                        "sans-serif-light",
+                                        android.graphics.Typeface.BOLD
+                                    )
+                                    isAntiAlias = true
+                                    letterSpacing = 0.05f
+                                    setShadowLayer(8f, 0f, 2f, android.graphics.Color.argb(180, 0, 0, 0))
                                 }
                                 
                                 drawText(name, 0f, 0f, paint)

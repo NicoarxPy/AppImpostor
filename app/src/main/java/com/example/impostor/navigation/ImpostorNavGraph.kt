@@ -10,6 +10,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import androidx.navigation.NavType
 import com.example.impostor.data.PlayerPreferences
 import com.example.impostor.ui.screens.*
 import com.example.impostor.viewmodel.GameViewModel
@@ -57,13 +59,23 @@ fun ImpostorNavGraph(
                 onBackClick = {
                     navController.popBackStack()
                 },
-                onStartGame = { playerNames, randomStart ->
+                onStartGame = { playerNames, randomStart, votingEnabled ->
                     viewModel.addPlayers(playerNames)
-                    viewModel.startGame(randomStart)
-                    navController.navigate(Screen.Cards.route)
+                    viewModel.startGame(randomStart, votingEnabled)
+                    navController.navigate(Screen.Transition.route)
                 },
                 onClearSavedPlayers = {
                     viewModel.clearSavedPlayers()
+                }
+            )
+        }
+        
+        composable(Screen.Transition.route) {
+            TransitionScreen(
+                onTransitionComplete = {
+                    navController.navigate(Screen.Cards.route) {
+                        popUpTo(Screen.Transition.route) { inclusive = true }
+                    }
                 }
             )
         }
@@ -106,6 +118,71 @@ fun ImpostorNavGraph(
                     gameState = gameState,
                     onRevealImpostor = {
                         navController.navigate(Screen.Reveal.route)
+                    },
+                    onStartVoting = {
+                        navController.navigate(Screen.Voting.route)
+                    }
+                )
+            }
+        }
+        
+        composable(Screen.Voting.route) {
+            viewModel.gameState?.let { gameState ->
+                VotingScreen(
+                    gameState = gameState,
+                    onVoteConfirmed = { votedPlayerIndex ->
+                        val isCorrect = votedPlayerIndex == gameState.impostorIndex
+                        navController.navigate(
+                            Screen.VoteResult.createRoute(votedPlayerIndex, isCorrect)
+                        )
+                    }
+                )
+            }
+        }
+        
+        composable(
+            route = Screen.VoteResult.route,
+            arguments = listOf(
+                navArgument("votedPlayerIndex") { type = NavType.IntType },
+                navArgument("isCorrect") { type = NavType.BoolType }
+            )
+        ) { backStackEntry ->
+            viewModel.gameState?.let { gameState ->
+                val votedPlayerIndex = backStackEntry.arguments?.getInt("votedPlayerIndex") ?: 0
+                val isCorrect = backStackEntry.arguments?.getBoolean("isCorrect") ?: false
+                
+                VoteResultScreen(
+                    gameState = gameState,
+                    votedPlayerIndex = votedPlayerIndex,
+                    isCorrect = isCorrect,
+                    onContinue = {
+                        if (isCorrect) {
+                            // Impostor encontrado - nueva ronda
+                            viewModel.resetGame()
+                            navController.navigate(Screen.Cards.route) {
+                                popUpTo(Screen.Cards.route) { inclusive = true }
+                            }
+                        } else {
+                            // Eliminar jugador y verificar si impostor gana
+                            viewModel.eliminatePlayer(votedPlayerIndex)
+                            val alivePlayersAfterElimination = gameState.players.count { !it.isEliminated } - 1
+                            
+                            if (alivePlayersAfterElimination <= 2) {
+                                // Impostor gana - nueva ronda
+                                coroutineScope.launch {
+                                    delay(100)
+                                    viewModel.resetGame()
+                                    navController.navigate(Screen.Cards.route) {
+                                        popUpTo(Screen.Cards.route) { inclusive = true }
+                                    }
+                                }
+                            } else {
+                                // Continuar ronda - volver a debate
+                                navController.navigate(Screen.Debate.route) {
+                                    popUpTo(Screen.Debate.route) { inclusive = true }
+                                }
+                            }
+                        }
                     }
                 )
             }
