@@ -2,6 +2,9 @@ package com.example.impostor.navigation
 
 sealed class Screen(val route: String) {
     object Welcome : Screen("welcome")
+    object ListTypeSelection : Screen("list_type_selection")
+    object CustomCategories : Screen("custom_categories")
+    object CreateCategory : Screen("create_category")
     object CategorySelection : Screen("category_selection")
     object AddPlayers : Screen("add_players")
     object Transition : Screen("transition")
@@ -13,5 +16,8 @@ sealed class Screen(val route: String) {
     object VoteResult : Screen("vote_result/{votedPlayerIndex}/{isCorrect}") {
         fun createRoute(votedPlayerIndex: Int, isCorrect: Boolean) = 
             "vote_result/$votedPlayerIndex/$isCorrect"
+    }
+    object EditCategory : Screen("edit_category/{categoryId}") {
+        fun createRoute(categoryId: String) = "edit_category/$categoryId"
     }
 }

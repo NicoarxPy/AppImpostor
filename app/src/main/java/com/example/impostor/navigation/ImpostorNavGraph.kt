@@ -25,10 +25,12 @@ fun ImpostorNavGraph(
     context: Context = LocalContext.current
 ) {
     val playerPreferences = PlayerPreferences(context)
+    val customCategoriesPreferences = com.example.impostor.data.CustomCategoriesPreferences(context)
     val viewModel: GameViewModel = viewModel(
         factory = GameViewModelFactory(playerPreferences)
     )
     val savedPlayers by viewModel.savedPlayerNames.collectAsState()
+    val customCategories by customCategoriesPreferences.customCategories.collectAsState(initial = emptyList())
     val coroutineScope = rememberCoroutineScope()
 
     NavHost(
@@ -38,9 +40,104 @@ fun ImpostorNavGraph(
         composable(Screen.Welcome.route) {
             WelcomeScreen(
                 onPlayClick = {
+                    navController.navigate(Screen.ListTypeSelection.route)
+                }
+            )
+        }
+        
+        composable(Screen.ListTypeSelection.route) {
+            ListTypeSelectionScreen(
+                onCustomListsClick = {
+                    navController.navigate(Screen.CustomCategories.route)
+                },
+                onPredefinedListsClick = {
                     navController.navigate(Screen.CategorySelection.route)
                 }
             )
+        }
+        
+        composable(Screen.CustomCategories.route) {
+            CustomCategoriesScreen(
+                customCategories = customCategories,
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                onCreateNewClick = {
+                    navController.navigate(Screen.CreateCategory.route)
+                },
+                onCategoryClick = { customCategory ->
+                    val category = com.example.impostor.data.Category(
+                        id = customCategory.id,
+                        name = customCategory.name,
+                        words = customCategory.words,
+                        isCustom = true
+                    )
+                    viewModel.selectCategory(category)
+                    navController.navigate(Screen.AddPlayers.route)
+                },
+                onDeleteCategory = { categoryId ->
+                    coroutineScope.launch {
+                        customCategoriesPreferences.deleteCategory(categoryId)
+                    }
+                },
+                onEditCategory = { customCategory ->
+                    navController.navigate(Screen.EditCategory.createRoute(customCategory.id))
+                }
+            )
+        }
+        
+        composable(Screen.CreateCategory.route) {
+            CreateCategoryScreen(
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                onCategoryCreated = { id, name, words ->
+                    coroutineScope.launch {
+                        val customCategory = com.example.impostor.data.CustomCategory(
+                            id = id,
+                            name = name,
+                            words = words
+                        )
+                        customCategoriesPreferences.saveCategory(customCategory)
+                        navController.popBackStack()
+                    }
+                }
+            )
+        }
+
+        composable(
+            route = Screen.EditCategory.route,
+            arguments = listOf(navArgument("categoryId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val categoryId = backStackEntry.arguments?.getString("categoryId")
+            val customCategory = customCategories.find { it.id == categoryId }
+            
+            if (customCategory != null) {
+                val category = com.example.impostor.data.Category(
+                    id = customCategory.id,
+                    name = customCategory.name,
+                    words = customCategory.words,
+                    isCustom = true
+                )
+                
+                CreateCategoryScreen(
+                    onBackClick = {
+                        navController.popBackStack()
+                    },
+                    onCategoryCreated = { id, name, words ->
+                        coroutineScope.launch {
+                            val updatedCategory = com.example.impostor.data.CustomCategory(
+                                id = id,
+                                name = name,
+                                words = words
+                            )
+                            customCategoriesPreferences.updateCategory(updatedCategory)
+                            navController.popBackStack()
+                        }
+                    },
+                    existingCategory = category
+                )
+            }
         }
 
         composable(Screen.CategorySelection.route) {

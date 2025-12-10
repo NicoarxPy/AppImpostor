@@ -1,13 +1,16 @@
 package com.example.impostor.data
 
 data class Category(
+    val id: String = "",
     val name: String,
-    val words: List<String>
+    val words: List<String>,
+    val isCustom: Boolean = false
 )
 
 object CategoriesData {
     val categories = listOf(
         Category(
+            id = "deportes",
             name = "Deportes",
             words = listOf(
                 "Fútbol", "Baloncesto", "Tenis", "Natación", "Voleibol",
@@ -23,6 +26,7 @@ object CategoriesData {
             )
         ),
         Category(
+            id = "futbolistas",
             name = "Futbolistas",
             words = listOf(
                 "Messi", "Cristiano Ronaldo", "Neymar", "Mbappé", "Haaland",
@@ -38,6 +42,7 @@ object CategoriesData {
             )
         ),
         Category(
+            id = "objetos",
             name = "Objetos",
             words = listOf(
                 "Silla", "Mesa", "Lámpara", "Libro", "Teléfono",
@@ -53,6 +58,7 @@ object CategoriesData {
             )
         ),
         Category(
+            id = "cantantes",
             name = "Cantantes",
             words = listOf(
                 "Shakira", "Bad Bunny", "Karol G", "J Balvin", "Rosalía",
@@ -68,6 +74,7 @@ object CategoriesData {
             )
         ),
         Category(
+            id = "videojuegos",
             name = "Videojuegos",
             words = listOf(
                 "Minecraft", "Fortnite", "GTA", "FIFA", "Call of Duty",
@@ -83,6 +90,7 @@ object CategoriesData {
             )
         ),
         Category(
+            id = "series_peliculas",
             name = "Series y Películas",
             words = listOf(
                 "Breaking Bad", "Game of Thrones", "Stranger Things", "The Walking Dead", "Friends",
@@ -98,6 +106,7 @@ object CategoriesData {
             )
         ),
         Category(
+            id = "clubes",
             name = "Clubes",
             words = listOf(
                 "Real Madrid", "Barcelona", "Manchester United", "Liverpool", "Bayern Munich",

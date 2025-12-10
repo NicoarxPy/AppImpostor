@@ -39,12 +39,6 @@ fun VotingScreen(
                     .padding(bottom = 24.dp, top = 24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    text = "🗳️",
-                    fontSize = 64.sp
-                )
-                
-                Spacer(modifier = Modifier.height(16.dp))
                 
                 Text(
                     text = "¿Quién es el impostor?",
