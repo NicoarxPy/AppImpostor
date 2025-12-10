@@ -286,6 +286,70 @@ object CategoriesData {
                 "Tigres", "Monterrey", "Atlético Nacional", "Millonarios", "Santa Fe",
                 "Al Hilal", "Al Nassr", "Al Ahly", "Zamalek", "Kaizer Chiefs"
             )
+        ),
+        Category(
+            id = "Youtubers",
+            name = "Youtubers",
+            words = listOf(
+                "PewDiePie", "MrBeast", "Markiplier", "Jacksepticeye", "Ninja",
+                "Pokimane", "Ibai", "AuronPlay", "Rubius", "TheGrefg",
+                "ElMariana", "JuanSGuarnizo", "Gerardito", "xQc", "Kai Cenat",
+                "Dream", "GeorgeNotFound", "Sapnap", "Technoblade", "TommyInnit",
+                "Willyrex", "Vegetta777", "Staxx", "Luzu", "Alexby",
+                "Fernanfloo", "Ami Rodriguez", "German Garmendia", "Dross", "Alejo Igoa",
+                "Coscu", "Momo", "Sprint", "Coscu Army", "Reven",
+                "IlloJuan", "Karmaland", "ByViruzz", "DjMaRiio", "Ampeter",
+                "LosPolinesios", "Yolo Aventuras", "Antrax", "JuegaGerman", "Mis Pastelitos",
+                "MrBeast Español", "Zarcort", "Dalas Review", "Zorman", "Lyna",
+                "Mikecrack", "ElTrollino", "TimbaVK", "Invictor", "Spreen",
+                "ElXokas", "Kidi", "Manucraft", "NavajaNegra", "Knekro",
+                "Quackity", "FedeVigevani", "Coreano Loco", "AlphaSniper", "Lolito",
+                "ElRubiusOMG", "Patty Dragona", "Mangel", "GeorgeNotFound Español", "ElDed",
+                "Chimichurri", "BarcaGamer", "Twitch Rivals", "AriGameplays", "La Rivers",
+                "ElSpreen", "Carola", "Paracetamor", "Westcol", "RiversGG",
+                "Roier", "Quackity Studios", "RicharBetaCode", "Edd00", "Luigikid",
+                "Miniminter", "KSI", "Logan Paul", "Jake Paul", "Sidemen",
+                "Loretta", "Maryland", "El Ceerre", "SpreenDMC", "ZilverK",
+                "MrStiven Tc", "Nexxuz", "Folagor", "Piper Rockelle", "Ben Azelart",
+                "Brianda Deyanara", "Kimberly Loaiza", "JD Pantoja", "Tiko", "SSSniperWolf",
+                "VanossGaming", "H2ODelirious", "Lachlan", "Fresh", "Lannan Eacott (LazarBeam)",
+                "Typical Gamer", "SypherPK", "TimTheTatman", "DrDisRespect", "Shroud",
+                "Summit1G", "Asmongold", "HasanAbi", "MoistCr1TiKaL", "Ludwig",
+                "Fuslie", "Valkyrae", "Sykkuno", "Corpse Husband", "Rachel Hofstetter",
+                "GothamChess", "BotezLive", "Hikaru Nakamura", "GMNaroditsky", "Eric Rosen",
+                "MrKeroro10", "GustavoSG", "Mikasaurio", "Maau", "DimeNacho",
+                "iTownGameplay", "RaptorGamer", "Lalo", "Plech", "CrackMan",
+                "ElCoci", "Komanche", "Grefg Shorts", "Cheeto", "Kori",
+                "UnRubius", "Mortis", "Vicens", "TortillaLand", "Axozer",
+                "MissaSinfonia", "GravyCatMan", "ItsFunneh", "Aphmau", "PrestonPlayz",
+                "BajanCanadian", "CaptainSparklez", "Callux", "Nadeshot", "CourageJD"
+            )
+        ),
+        Category(
+            id = "Famosos",
+            name = "Famosos",
+            words = listOf(
+                "Leonardo DiCaprio", "Brad Pitt", "Johnny Depp", "Tom Cruise", "Robert Downey Jr",
+                "Dwayne Johnson", "Will Smith", "Chris Hemsworth", "Chris Evans", "Ryan Reynolds",
+                "Keanu Reeves", "Hugh Jackman", "Matt Damon", "Ben Affleck", "Samuel L. Jackson",
+                "Morgan Freeman", "Al Pacino", "Robert De Niro", "Christian Bale", "Joaquin Phoenix",
+                "Adam Driver", "Oscar Isaac", "Mark Ruffalo", "Jason Momoa", "Henry Cavill",
+                "Tom Hanks", "Jake Gyllenhaal", "Jared Leto", "Colin Farrell", "Ewan McGregor",
+                "Daniel Radcliffe", "Rupert Grint", "Emma Watson", "Michael Fassbender", "James McAvoy",
+                "Benedict Cumberbatch", "Martin Freeman", "Andrew Garfield", "Tobey Maguire", "Tom Holland",
+                "Chadwick Boseman", "Paul Rudd", "Jeremy Renner", "Don Cheadle", "Josh Brolin",
+                "Idris Elba", "Jamie Foxx", "Chris Pratt", "Zac Efron", "Shia LaBeouf",
+                "Jude Law", "Orlando Bloom", "Viggo Mortensen", "Sean Bean", "Ian McKellen",
+                "Patrick Stewart", "Daniel Craig", "Pierce Brosnan", "Rami Malek", "Timothée Chalamet",
+                "Robert Pattinson", "Kristen Stewart", "Taylor Lautner", "Michael B. Jordan", "Forest Whitaker",
+                "John Boyega", "Oscar Isaac", "Mahershala Ali", "Kit Harington", "Peter Dinklage",
+                "Nicolas Cage", "Bruce Willis", "Sylvester Stallone", "Arnold Schwarzenegger", "Mel Gibson",
+                "Antonio Banderas", "Gael García Bernal", "Diego Luna", "Javier Bardem", "Penélope Cruz",
+                "Salma Hayek", "Harrison Ford", "Jeff Bridges", "Kevin Costner", "Mark Wahlberg",
+                "Ryan Gosling", "Eddie Redmayne", "Colin Firth", "Hugh Grant", "Bill Murray",
+                "Jim Carrey", "Robin Williams", "Jack Nicholson", "Heath Ledger", "Brendan Fraser",
+                "Ke Huy Quan", "John Travolta", "Denzel Washington", "Bruce Lee", "Jackie Chan"
+            )
         )
     )
 }
