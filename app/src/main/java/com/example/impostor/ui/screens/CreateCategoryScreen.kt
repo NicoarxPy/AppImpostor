@@ -19,6 +19,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.impostor.data.Category
+import com.example.impostor.ui.components.AutoSizeText
 import java.util.UUID
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -41,7 +42,7 @@ fun CreateCategoryScreen(
         topBar = {
             TopAppBar(
                 title = { 
-                    Text(
+                    AutoSizeText(
                         if (existingCategory != null) "Editar categoría" else "Nueva categoría",
                         fontWeight = FontWeight.Bold,
                         color = Color.White
@@ -73,7 +74,7 @@ fun CreateCategoryScreen(
                             disabledContentColor = Color.White.copy(alpha = 0.5f)
                         )
                     ) {
-                        Text(if (existingCategory != null) "Guardar" else "Crear")
+                        AutoSizeText(if (existingCategory != null) "Guardar" else "Crear")
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -92,7 +93,7 @@ fun CreateCategoryScreen(
                 .padding(24.dp)
         ) {
             item {
-                Text(
+                AutoSizeText(
                     text = "Nombre de la categoría",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
@@ -110,7 +111,7 @@ fun CreateCategoryScreen(
                     placeholder = { Text("Ej: Países, Marcas, etc.", color = Color.White.copy(alpha = 0.5f)) },
                     isError = showNameError,
                     supportingText = if (showNameError) {
-                        { Text("El nombre no puede estar vacío", color = MaterialTheme.colorScheme.error) }
+                        { AutoSizeText("El nombre no puede estar vacío", color = MaterialTheme.colorScheme.error) }
                     } else null,
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(
@@ -129,7 +130,7 @@ fun CreateCategoryScreen(
                 
                 Spacer(modifier = Modifier.height(24.dp))
                 
-                Text(
+                AutoSizeText(
                     text = "Agregar palabras",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
@@ -156,7 +157,7 @@ fun CreateCategoryScreen(
                     placeholder = { Text("Palabra 1\nPalabra 2\nPalabra 3...", color = Color.White.copy(alpha = 0.5f)) },
                     isError = showWordsError,
                     supportingText = if (showWordsError) {
-                        { Text("Debes agregar al menos una palabra", color = MaterialTheme.colorScheme.error) }
+                        { AutoSizeText("Debes agregar al menos una palabra", color = MaterialTheme.colorScheme.error) }
                     } else null,
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Sentences
@@ -194,13 +195,13 @@ fun CreateCategoryScreen(
                         contentColor = Color.White
                     )
                 ) {
-                    Text("Agregar palabras")
+                    AutoSizeText("Agregar palabras")
                 }
                 
                 if (addedWords.isNotEmpty()) {
                     Spacer(modifier = Modifier.height(24.dp))
                     
-                    Text(
+                    AutoSizeText(
                         text = "Palabras agregadas (${addedWords.size})",
                         fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
@@ -273,7 +274,7 @@ fun CreateCategoryScreen(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            Text(
+                            AutoSizeText(
                                 text = word,
                                 fontSize = 16.sp,
                                 modifier = Modifier.weight(1f),

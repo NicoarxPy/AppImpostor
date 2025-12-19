@@ -19,6 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.impostor.data.CustomCategory
+import com.example.impostor.ui.components.AutoSizeText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,7 +36,7 @@ fun CustomCategoriesScreen(
     if (categoryToDelete != null) {
         AlertDialog(
             onDismissRequest = { categoryToDelete = null },
-            title = { Text("Eliminar categoría") },
+            title = { AutoSizeText("Eliminar categoría") },
             text = { Text("¿Estás seguro de que quieres eliminar la categoría \"${categoryToDelete?.name}\"?") },
             confirmButton = {
                 TextButton(
@@ -47,12 +48,12 @@ fun CustomCategoriesScreen(
                         contentColor = MaterialTheme.colorScheme.error
                     )
                 ) {
-                    Text("Eliminar")
+                    AutoSizeText("Eliminar")
                 }
             },
             dismissButton = {
                 TextButton(onClick = { categoryToDelete = null }) {
-                    Text("Cancelar")
+                    AutoSizeText("Cancelar")
                 }
             },
             containerColor = Color(0xFF212121),
@@ -66,7 +67,7 @@ fun CustomCategoriesScreen(
         topBar = {
             TopAppBar(
                 title = { 
-                    Text(
+                    AutoSizeText(
                         "Listas personalizadas",
                         fontWeight = FontWeight.Bold,
                         color = Color.White
@@ -102,12 +103,12 @@ fun CustomCategoriesScreen(
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(
+                    AutoSizeText(
                         text = "📝",
                         fontSize = 64.sp,
                         modifier = Modifier.padding(bottom = 16.dp)
                     )
-                    Text(
+                    AutoSizeText(
                         text = "No tienes categorías personalizadas",
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Medium,
@@ -115,7 +116,7 @@ fun CustomCategoriesScreen(
                         color = Color.White.copy(alpha = 0.6f) // Texto blanco con transparencia
                     )
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text(
+                    AutoSizeText(
                         text = "Toca el botón + para crear una",
                         fontSize = 14.sp,
                         textAlign = TextAlign.Center,
@@ -155,15 +156,16 @@ fun CustomCategoriesScreen(
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.Center
                             ) {
-                                Text(
+                                AutoSizeText(
                                     text = category.name,
                                     fontSize = 22.sp,
                                     fontWeight = FontWeight.Bold,
                                     textAlign = TextAlign.Center,
-                                    color = Color.White // Texto blanco
+                                    color = Color.White,
+                                    letterSpacing = 0.5.sp
                                 )
                                 Spacer(modifier = Modifier.height(8.dp))
-                                Text(
+                                AutoSizeText(
                                     text = "${category.words.size} palabras",
                                     fontSize = 12.sp,
                                     fontWeight = FontWeight.Light,

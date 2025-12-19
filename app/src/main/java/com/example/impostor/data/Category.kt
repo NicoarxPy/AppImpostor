@@ -10,6 +10,30 @@ data class Category(
 object CategoriesData {
     val categories = listOf(
         Category(
+            id = "animales",
+            name = "Animales",
+            words = listOf(
+                "Perro", "Gato", "León", "Tigre", "Elefante",
+                "Jirafa", "Cebra", "Oso", "Lobo", "Zorro",
+                "Mono", "Gorila", "Chimpancé", "Hipopótamo", "Rinoceronte",
+                "Cocodrilo", "Serpiente", "Tortuga", "Águila", "Halcón",
+                "Búho", "Loro", "Pingüino", "Delfín", "Ballena",
+                "Tiburón", "Pulpo", "Calamar", "Medusa", "Estrella de mar",
+                "Caballo", "Vaca", "Oveja", "Cabra", "Cerdo",
+                "Gallina", "Pato", "Pavo", "Conejo", "Hámster",
+                "Ratón", "Ardilla", "Erizo", "Murciélago", "Panda",
+                "Koala", "Canguro", "Perezoso", "Armadillo", "Mapache",
+                "Suricata", "Lemur", "Tucán", "Colibrí", "Canario",
+                "Pavo real", "Cisne", "Flamenco", "Pelícano", "Gaviota",
+                "Rana", "Sapo", "Salamandra", "Iguana", "Camaleón",
+                "Gecko", "Dragón de Komodo", "Ornitorrinco", "Equidna", "Diablo de Tasmania",
+                "Wombat", "Okapi", "Narval", "Beluga", "Manatí",
+                "Foca", "Morsa", "León marino", "Nutria", "Castor",
+                "Puercoespín", "Zorrillo", "Tejón", "Comadreja", "Lince",
+                "Puma", "Leopardo", "Guepardo", "Jaguar", "Pantera"
+            )
+        ),
+        Category(
             id = "deportes",
             name = "Deportes",
             words = listOf(

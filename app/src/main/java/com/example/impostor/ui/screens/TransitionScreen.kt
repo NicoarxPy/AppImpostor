@@ -13,6 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.impostor.R
+import com.example.impostor.ui.components.AutoSizeText
 import kotlinx.coroutines.delay
 
 @Composable
@@ -44,12 +45,12 @@ fun TransitionScreen(
             
             Spacer(modifier = Modifier.height(32.dp))
             
-            Text(
+            AutoSizeText(
                 text = "IMPOSTOR",
                 fontSize = 56.sp,
                 fontWeight = FontWeight.Black,
-                letterSpacing = 4.sp,
-                color = Color.White // Texto blanco
+                color = Color.White, // Texto blanco
+                style = LocalTextStyle.current.copy(letterSpacing = 4.sp)
             )
             
             Spacer(modifier = Modifier.height(12.dp))

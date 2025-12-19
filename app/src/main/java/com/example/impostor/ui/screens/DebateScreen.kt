@@ -12,6 +12,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.impostor.data.GameState
+import com.example.impostor.ui.components.AutoSizeText
 
 @Composable
 fun DebateScreen(
@@ -53,7 +54,7 @@ fun DebateScreen(
                                 .padding(24.dp),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Text(
+                            AutoSizeText(
                                 text = "Comienza",
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.Light,
@@ -61,7 +62,7 @@ fun DebateScreen(
                                 color = Color.White.copy(alpha = 0.6f) // Texto blanco con transparencia
                             )
                             Spacer(modifier = Modifier.height(8.dp))
-                            Text(
+                            AutoSizeText(
                                 text = gameState.players[gameState.currentStarterIndex].name,
                                 fontSize = 32.sp,
                                 fontWeight = FontWeight.Bold,
@@ -71,7 +72,7 @@ fun DebateScreen(
                     }
                 }
                 
-                Text(
+                AutoSizeText(
                     text = "DEBATE",
                     fontSize = 48.sp,
                     fontWeight = FontWeight.Black,
@@ -106,7 +107,7 @@ fun DebateScreen(
                     contentColor = Color.White // Texto blanco
                 )
             ) {
-                Text(
+                AutoSizeText(
                     text = if (gameState.votingEnabled) "Iniciar Votación" else "Revelar Impostor",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.SemiBold,
@@ -127,11 +128,6 @@ fun RevealScreen(
     val impostorName = gameState.players[gameState.impostorIndex].name
     var isNavigating by remember { mutableStateOf(false) }
     
-    // RevealScreen mantiene su estilo de "Alerta/Error" o se adapta?
-    // El usuario pidió "pantalla de DEBATE", pero Reveal está aquí.
-    // Voy a mantener RevealScreen con su estilo rojo impactante pero asegurando texto blanco.
-    // O mejor, lo dejo como estaba ya que el usuario pidió específicamente "DEBATE".
-    
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = if (isNavigating) MaterialTheme.colorScheme.background else MaterialTheme.colorScheme.errorContainer
@@ -149,7 +145,7 @@ fun RevealScreen(
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(
+                    AutoSizeText(
                         text = "EL IMPOSTOR ERA",
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Light,
@@ -160,7 +156,7 @@ fun RevealScreen(
                     
                     Spacer(modifier = Modifier.height(16.dp))
                     
-                    Text(
+                    AutoSizeText(
                         text = impostorName,
                         fontSize = 48.sp,
                         fontWeight = FontWeight.Black,
@@ -174,7 +170,7 @@ fun RevealScreen(
                     
                     Spacer(modifier = Modifier.height(24.dp))
                     
-                    Text(
+                    AutoSizeText(
                         text = "La palabra era",
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Light,
@@ -185,7 +181,7 @@ fun RevealScreen(
                     
                     Spacer(modifier = Modifier.height(8.dp))
                     
-                    Text(
+                    AutoSizeText(
                         text = gameState.selectedWord,
                         fontSize = 28.sp,
                         fontWeight = FontWeight.SemiBold,
@@ -210,7 +206,7 @@ fun RevealScreen(
                         contentColor = Color.White
                     )
                 ) {
-                    Text(
+                    AutoSizeText(
                         text = "Siguiente Ronda",
                         fontSize = 20.sp,
                         fontWeight = FontWeight.SemiBold,

@@ -18,6 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.impostor.data.GameState
+import com.example.impostor.ui.components.AutoSizeText
 
 @Composable
 fun CardsScreen(
@@ -39,7 +40,7 @@ fun CardsScreen(
                 .padding(16.dp)
         ) {
             Spacer(modifier = Modifier.height(32.dp))
-            
+
             Text(
                 text = "Toca una tarjeta para revelar tu palabra",
                 fontSize = 16.sp,
@@ -51,7 +52,7 @@ fun CardsScreen(
             )
 
             LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
+                columns = GridCells.Adaptive(minSize = 150.dp),
                 modifier = Modifier.weight(1f),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -145,7 +146,7 @@ fun PlayerCard(
                     verticalArrangement = Arrangement.Center,
                     modifier = Modifier.padding(16.dp)
                 ) {
-                    Text(
+                    AutoSizeText(
                         text = playerName,
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
@@ -184,11 +185,12 @@ fun PlayerCard(
                             Color.Red
                         } else {
                             Color.White
-                        }
+                        },
+                        maxLines = 1 // Ensure it stays on one line
                     )
-                    
+
                     Spacer(modifier = Modifier.height(16.dp))
-                    
+
                     Button(
                         onClick = onReadyClick,
                         modifier = Modifier.fillMaxWidth(0.8f),

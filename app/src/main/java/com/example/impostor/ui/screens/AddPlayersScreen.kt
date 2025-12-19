@@ -17,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.impostor.ui.components.AutoSizeText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,7 +55,7 @@ fun AddPlayersScreen(
     if (showDeleteDialog) {
         AlertDialog(
             onDismissRequest = { showDeleteDialog = false },
-            title = { Text("Borrar participantes guardados", color = Color.White) },
+            title = { AutoSizeText("Borrar participantes guardados", color = Color.White) },
             text = { Text("¿Estás seguro de que quieres borrar todos los participantes guardados?", color = Color.White.copy(alpha = 0.8f)) },
             containerColor = Color(0xFF212121),
             confirmButton = {
@@ -68,12 +69,12 @@ fun AddPlayersScreen(
                         contentColor = MaterialTheme.colorScheme.error
                     )
                 ) {
-                    Text("Borrar")
+                    AutoSizeText("Borrar")
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showDeleteDialog = false }) {
-                    Text("Cancelar")
+                    AutoSizeText("Cancelar")
                 }
             }
         )
@@ -82,12 +83,12 @@ fun AddPlayersScreen(
     if (showInfoDialog) {
         AlertDialog(
             onDismissRequest = { showInfoDialog = false },
-            title = { Text("Inicio aleatorio", color = Color.White) },
+            title = { AutoSizeText("Inicio aleatorio", color = Color.White) },
             text = { Text("En cada ronda se elegirá de manera aleatoria quién debe comenzar la discusión mediante una ruleta interactiva.", color = Color.White.copy(alpha = 0.8f)) },
             containerColor = Color(0xFF212121),
             confirmButton = {
                 TextButton(onClick = { showInfoDialog = false }) {
-                    Text("Entendido")
+                    AutoSizeText("Entendido")
                 }
             }
         )
@@ -96,12 +97,12 @@ fun AddPlayersScreen(
     if (showVotingInfoDialog) {
         AlertDialog(
             onDismissRequest = { showVotingInfoDialog = false },
-            title = { Text("Votaciones", color = Color.White) },
+            title = { AutoSizeText("Votaciones", color = Color.White) },
             text = { Text("Los jugadores votarán para identificar al impostor. Si se equivocan, el jugador votado es eliminado y continúa la ronda. Gana el impostor si solo quedan 2 jugadores vivos.", color = Color.White.copy(alpha = 0.8f)) },
             containerColor = Color(0xFF212121),
             confirmButton = {
                 TextButton(onClick = { showVotingInfoDialog = false }) {
-                    Text("Entendido")
+                    AutoSizeText("Entendido")
                 }
             }
         )
@@ -125,14 +126,14 @@ fun AddPlayersScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Column(modifier = Modifier.weight(1f)) {
-                    Text(
+                    AutoSizeText(
                         text = "Categoría: $categoryName",
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Light,
                         letterSpacing = 1.sp,
                         color = Color.White.copy(alpha = 0.6f)
                     )
-                    Text(
+                    AutoSizeText(
                         text = "Jugadores",
                         fontSize = 36.sp,
                         fontWeight = FontWeight.Black,
@@ -182,7 +183,7 @@ fun AddPlayersScreen(
                             modifier = Modifier.size(48.dp),
                             colors = IconButtonDefaults.iconButtonColors(contentColor = Color.White)
                         ) {
-                            Text(
+                            AutoSizeText(
                                 text = "−",
                                 fontSize = 32.sp,
                                 fontWeight = FontWeight.Light
@@ -192,13 +193,13 @@ fun AddPlayersScreen(
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Text(
+                            AutoSizeText(
                                 text = "$playerCount",
                                 fontSize = 48.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Color.White
                             )
-                            Text(
+                            AutoSizeText(
                                 text = "jugadores",
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.Light,
@@ -212,7 +213,7 @@ fun AddPlayersScreen(
                             modifier = Modifier.size(48.dp),
                             colors = IconButtonDefaults.iconButtonColors(contentColor = Color.White)
                         ) {
-                            Text(
+                            AutoSizeText(
                                 text = "+",
                                 fontSize = 32.sp,
                                 fontWeight = FontWeight.Light
@@ -256,7 +257,7 @@ fun AddPlayersScreen(
                                             checkmarkColor = Color.Black
                                         )
                                     )
-                                    Text(
+                                    AutoSizeText(
                                         text = "Inicio aleatorio",
                                         fontSize = 15.sp,
                                         fontWeight = FontWeight.Medium,
@@ -304,7 +305,7 @@ fun AddPlayersScreen(
                                             checkmarkColor = Color.Black
                                         )
                                     )
-                                    Text(
+                                    AutoSizeText(
                                         text = "Habilitar votaciones",
                                         fontSize = 15.sp,
                                         fontWeight = FontWeight.Medium,
@@ -378,7 +379,7 @@ fun AddPlayersScreen(
                         disabledContentColor = Color.White.copy(alpha = 0.5f)
                     )
                 ) {
-                    Text(
+                    AutoSizeText(
                         text = "Comenzar Juego",
                         fontSize = 20.sp,
                         fontWeight = FontWeight.SemiBold,

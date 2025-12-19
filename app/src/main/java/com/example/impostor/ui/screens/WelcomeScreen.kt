@@ -13,6 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.impostor.R
+import com.example.impostor.ui.components.AutoSizeText
 
 @Composable
 fun WelcomeScreen(
@@ -43,12 +44,12 @@ fun WelcomeScreen(
                 
                 Spacer(modifier = Modifier.height(32.dp))
                 
-                Text(
+                AutoSizeText(
                     text = "IMPOSTOR",
                     fontSize = 56.sp,
                     fontWeight = FontWeight.Black,
-                    letterSpacing = 4.sp,
-                    color = Color.White // Texto blanco
+                    color = Color.White, // Texto blanco
+                    style = LocalTextStyle.current.copy(letterSpacing = 4.sp)
                 )
                 
                 Spacer(modifier = Modifier.height(12.dp))
@@ -79,11 +80,11 @@ fun WelcomeScreen(
                     pressedElevation = 2.dp
                 )
             ) {
-                Text(
+                AutoSizeText(
                     text = "Jugar",
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold,
-                    letterSpacing = 2.sp
+                    style = LocalTextStyle.current.copy(letterSpacing = 2.sp)
                 )
             }
             

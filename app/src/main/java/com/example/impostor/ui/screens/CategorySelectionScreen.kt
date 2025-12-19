@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.impostor.data.Category
 import com.example.impostor.data.CategoriesData
+import com.example.impostor.ui.components.AutoSizeText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -98,13 +99,13 @@ fun CategoryCard(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text(
+            AutoSizeText(
                 text = category.name,
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
-                letterSpacing = 0.5.sp,
-                color = Color.White // Texto blanco
+                color = Color.White, // Texto blanco
+                style = LocalTextStyle.current.copy(letterSpacing = 0.5.sp)
             )
         }
     }

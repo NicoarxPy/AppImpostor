@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.impostor.data.GameState
+import com.example.impostor.ui.components.AutoSizeText
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -36,15 +37,12 @@ fun RouletteScreen(
     val playerNames = gameState.players.map { it.name }
     val colors = remember {
         listOf(
-            Color(0xFF90CAF9), // Azul claro
-            Color(0xFF64B5F6), // Azul medio claro
-            Color(0xFF42A5F5), // Azul medio
-            Color(0xFF2196F3), // Azul
-            Color(0xFF1E88E5), // Azul medio oscuro
-            Color(0xFF1976D2), // Azul oscuro
-            Color(0xFFBBDEFB), // Azul muy claro
-            Color(0xFF82B1FF), // Azul pastel
-            Color(0xFF448AFF)  // Azul brillante suave
+            Color(0xFFF44336), // Red
+            Color(0xFF4CAF50), // Green
+            Color(0xFFFFEB3B), // Yellow
+            Color(0xFF2196F3), // Blue
+            Color(0xFFFF9800), // Orange
+            Color(0xFF9C27B0)  // Violet (Purple)
         )
     }
 
@@ -84,26 +82,26 @@ fun RouletteScreen(
             verticalArrangement = Arrangement.Center
         ) {
             if (selectedIndex == null) {
-                Text(
+                AutoSizeText(
                     text = "¿Quién comienza?",
                     fontSize = 32.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White, // Texto blanco
+                    color = Color.White,
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
 
-                Text(
+                AutoSizeText(
                     text = if (!hasSpun) "Toca la ruleta para girarla" else "Girando...",
                     fontSize = 18.sp,
-                    color = Color.White.copy(alpha = 0.7f), // Texto blanco con transparencia
+                    color = Color.White.copy(alpha = 0.7f),
                     modifier = Modifier.padding(bottom = 32.dp)
                 )
             } else {
-                Text(
+                AutoSizeText(
                     text = "¡Comienza!",
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White, // Texto blanco
+                    color = Color.White,
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
 
@@ -116,7 +114,7 @@ fun RouletteScreen(
                     ),
                     elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
                 ) {
-                    Text(
+                    AutoSizeText(
                         text = playerNames[selectedIndex!!],
                         fontSize = 36.sp,
                         fontWeight = FontWeight.Bold,
@@ -131,7 +129,8 @@ fun RouletteScreen(
 
             Box(
                 modifier = Modifier
-                    .size(320.dp)
+                    .fillMaxWidth()
+                    .aspectRatio(1f)
                     .padding(16.dp),
                 contentAlignment = Alignment.Center
             ) {
@@ -160,11 +159,12 @@ fun RouletteScreen(
 
                     rotate(rotation.value, pivot = Offset(centerX, centerY)) {
                         playerNames.forEachIndexed { index, name ->
+                            val sliceColor = colors[index % colors.size]
                             val startAngle = index * anglePerSection
                             
                             // Dibujar sección
                             drawArc(
-                                color = colors[index % colors.size],
+                                color = sliceColor,
                                 startAngle = startAngle - 90,
                                 sweepAngle = anglePerSection,
                                 useCenter = true,
@@ -196,7 +196,7 @@ fun RouletteScreen(
                                 
                                 val paint = android.graphics.Paint().apply {
                                     color = android.graphics.Color.WHITE
-                                    textSize = 52f
+                                    textSize = 48f
                                     textAlign = android.graphics.Paint.Align.CENTER
                                     typeface = android.graphics.Typeface.create(
                                         "sans-serif-light",
@@ -250,7 +250,7 @@ fun RouletteScreen(
                         contentColor = Color.White
                     )
                 ) {
-                    Text(
+                    AutoSizeText(
                         text = "Continuar",
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold
