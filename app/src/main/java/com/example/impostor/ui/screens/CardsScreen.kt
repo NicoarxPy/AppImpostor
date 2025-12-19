@@ -41,7 +41,7 @@ fun CardsScreen(
         ) {
             Spacer(modifier = Modifier.height(32.dp))
 
-            Text(
+            AutoSizeText(
                 text = "Toca una tarjeta para revelar tu palabra",
                 fontSize = 16.sp,
                 textAlign = TextAlign.Center,
@@ -91,7 +91,7 @@ fun CardsScreen(
                     disabledContentColor = Color.White.copy(alpha = 0.5f)
                 )
             ) {
-                Text(
+                AutoSizeText(
                     text = if (allCardsViewed) "Comenzar" else "Revela todas las tarjetas",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold
@@ -159,7 +159,7 @@ fun PlayerCard(
                     )
                     if (hasSeenCard) {
                         Spacer(modifier = Modifier.height(8.dp))
-                        Text(
+                        AutoSizeText(
                             text = "✓ Vista",
                             fontSize = 14.sp,
                             color = Color.Green.copy(alpha = 0.7f)
@@ -176,7 +176,7 @@ fun PlayerCard(
                         .graphicsLayer { rotationY = 180f }
                         .padding(16.dp)
                 ) {
-                    Text(
+                    AutoSizeText(
                         text = word,
                         fontSize = if (word == "IMPOSTOR") 24.sp else 28.sp,
                         fontWeight = FontWeight.Bold,
@@ -185,8 +185,7 @@ fun PlayerCard(
                             Color.Red
                         } else {
                             Color.White
-                        },
-                        maxLines = 1 // Ensure it stays on one line
+                        }
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -199,7 +198,7 @@ fun PlayerCard(
                             contentColor = Color.Black
                         )
                     ) {
-                        Text("Listo")
+                        AutoSizeText("Listo")
                     }
                 }
             }

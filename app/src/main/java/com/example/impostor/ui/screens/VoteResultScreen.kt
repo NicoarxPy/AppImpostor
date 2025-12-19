@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.impostor.R
 import com.example.impostor.data.GameState
+import com.example.impostor.ui.components.AutoSizeText
 
 @Composable
 fun VoteResultScreen(
@@ -69,7 +70,7 @@ fun VoteResultScreen(
                         Spacer(modifier = Modifier.height(40.dp))
                     }
                     
-                    Text(
+                    AutoSizeText(
                         text = when {
                             isCorrect -> "¡CORRECTO!"
                             impostorWins -> "¡IMPOSTOR GANA!"
@@ -79,7 +80,6 @@ fun VoteResultScreen(
                         fontWeight = FontWeight.Black,
                         letterSpacing = 2.sp,
                         textAlign = TextAlign.Center,
-                        lineHeight = 48.sp,
                         color = Color.White
                     )
                     
@@ -100,7 +100,7 @@ fun VoteResultScreen(
                                     .padding(24.dp),
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
-                                Text(
+                                AutoSizeText(
                                     text = "$votedPlayerName ha sido eliminado",
                                     fontSize = 20.sp,
                                     fontWeight = FontWeight.SemiBold,
@@ -110,7 +110,7 @@ fun VoteResultScreen(
                                 
                                 Spacer(modifier = Modifier.height(12.dp))
                                 
-                                Text(
+                                AutoSizeText(
                                     text = "Quedan $alivePlayersAfterElimination jugadores vivos",
                                     fontSize = 16.sp,
                                     fontWeight = FontWeight.Light,
@@ -120,7 +120,7 @@ fun VoteResultScreen(
                             }
                         }
                     } else {
-                        Text(
+                        AutoSizeText(
                             text = if (isCorrect)
                                 "$votedPlayerName era el impostor"
                             else
@@ -133,7 +133,7 @@ fun VoteResultScreen(
                         
                         Spacer(modifier = Modifier.height(16.dp))
                         
-                        Text(
+                        AutoSizeText(
                             text = "La palabra era: ${gameState.selectedWord}",
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold,
@@ -159,7 +159,7 @@ fun VoteResultScreen(
                         contentColor = Color.White // Texto blanco
                     )
                 ) {
-                    Text(
+                    AutoSizeText(
                         text = if (isCorrect || impostorWins) "Nueva Ronda" else "Continuar Ronda",
                         fontSize = 20.sp,
                         fontWeight = FontWeight.SemiBold,
