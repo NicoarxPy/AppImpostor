@@ -178,8 +178,8 @@ fun AddPlayersScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         IconButton(
-                            onClick = { if (playerCount > 2) playerCount-- },
-                            enabled = playerCount > 2,
+                            onClick = { if (playerCount > 3) playerCount-- },
+                            enabled = playerCount > 3,
                             modifier = Modifier.size(48.dp),
                             colors = IconButtonDefaults.iconButtonColors(contentColor = Color.White)
                         ) {
@@ -363,14 +363,14 @@ fun AddPlayersScreen(
                 Button(
                     onClick = {
                         val validNames = playerNames.filter { it.isNotBlank() }
-                        if (validNames.size >= 2) {
+                        if (validNames.size >= 3) {
                             onStartGame(validNames, randomStart, votingEnabled)
                         }
                     },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(64.dp),
-                    enabled = playerNames.count { it.isNotBlank() } >= 2,
+                    enabled = playerNames.count { it.isNotBlank() } >= 3,
                     shape = MaterialTheme.shapes.large,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.Black,
